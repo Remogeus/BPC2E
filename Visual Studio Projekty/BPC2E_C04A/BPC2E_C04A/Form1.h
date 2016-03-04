@@ -49,7 +49,8 @@ namespace BPC2E_C04A {
 	private: System::Windows::Forms::TextBox^  text_re_B;
 	private: System::Windows::Forms::Button^  bt_sub;
 	private: System::Windows::Forms::Button^  bt_mult;
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  bt_div;
+
 	private: System::Windows::Forms::Label^  Res_re;
 	private: System::Windows::Forms::Label^  Res_im;
 
@@ -79,7 +80,7 @@ namespace BPC2E_C04A {
 		this->text_re_B = (gcnew System::Windows::Forms::TextBox());
 		this->bt_sub = (gcnew System::Windows::Forms::Button());
 		this->bt_mult = (gcnew System::Windows::Forms::Button());
-		this->button1 = (gcnew System::Windows::Forms::Button());
+		this->bt_div = (gcnew System::Windows::Forms::Button());
 		this->Res_re = (gcnew System::Windows::Forms::Label());
 		this->Res_im = (gcnew System::Windows::Forms::Label());
 		this->SuspendLayout();
@@ -92,6 +93,7 @@ namespace BPC2E_C04A {
 		this->text_re_A->Name = L"text_re_A";
 		this->text_re_A->Size = System::Drawing::Size(100, 22);
 		this->text_re_A->TabIndex = 0;
+		this->text_re_A->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 		// 
 		// bt_add
 		// 
@@ -104,6 +106,7 @@ namespace BPC2E_C04A {
 		this->bt_add->TabIndex = 1;
 		this->bt_add->Text = L"A+B";
 		this->bt_add->UseVisualStyleBackColor = true;
+		this->bt_add->Click += gcnew System::EventHandler(this, &Form1::bt_add_Click);
 		// 
 		// label_real
 		// 
@@ -115,7 +118,6 @@ namespace BPC2E_C04A {
 		this->label_real->Size = System::Drawing::Size(35, 20);
 		this->label_real->TabIndex = 2;
 		this->label_real->Text = L"real";
-		this->label_real->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
 		// 
 		// label_A
 		// 
@@ -147,6 +149,7 @@ namespace BPC2E_C04A {
 		this->text_im_A->Name = L"text_im_A";
 		this->text_im_A->Size = System::Drawing::Size(100, 22);
 		this->text_im_A->TabIndex = 4;
+		this->text_im_A->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 		// 
 		// text_im_B
 		// 
@@ -156,6 +159,7 @@ namespace BPC2E_C04A {
 		this->text_im_B->Name = L"text_im_B";
 		this->text_im_B->Size = System::Drawing::Size(100, 22);
 		this->text_im_B->TabIndex = 8;
+		this->text_im_B->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 		// 
 		// label_B
 		// 
@@ -176,6 +180,7 @@ namespace BPC2E_C04A {
 		this->text_re_B->Name = L"text_re_B";
 		this->text_re_B->Size = System::Drawing::Size(100, 22);
 		this->text_re_B->TabIndex = 6;
+		this->text_re_B->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 		// 
 		// bt_sub
 		// 
@@ -188,6 +193,7 @@ namespace BPC2E_C04A {
 		this->bt_sub->TabIndex = 9;
 		this->bt_sub->Text = L"A-B";
 		this->bt_sub->UseVisualStyleBackColor = true;
+		this->bt_sub->Click += gcnew System::EventHandler(this, &Form1::bt_sub_Click);
 		// 
 		// bt_mult
 		// 
@@ -200,18 +206,20 @@ namespace BPC2E_C04A {
 		this->bt_mult->TabIndex = 10;
 		this->bt_mult->Text = L"A*B";
 		this->bt_mult->UseVisualStyleBackColor = true;
+		this->bt_mult->Click += gcnew System::EventHandler(this, &Form1::bt_mult_Click);
 		// 
-		// button1
+		// bt_div
 		// 
-		this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
-		this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+		this->bt_div->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+		this->bt_div->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 			static_cast<System::Byte>(238)));
-		this->button1->Location = System::Drawing::Point(252, 96);
-		this->button1->Name = L"button1";
-		this->button1->Size = System::Drawing::Size(48, 23);
-		this->button1->TabIndex = 11;
-		this->button1->Text = L"A*B";
-		this->button1->UseVisualStyleBackColor = true;
+		this->bt_div->Location = System::Drawing::Point(252, 96);
+		this->bt_div->Name = L"bt_div";
+		this->bt_div->Size = System::Drawing::Size(48, 23);
+		this->bt_div->TabIndex = 11;
+		this->bt_div->Text = L"A*B";
+		this->bt_div->UseVisualStyleBackColor = true;
+		this->bt_div->Click += gcnew System::EventHandler(this, &Form1::bt_div_Click);
 		// 
 		// Res_re
 		// 
@@ -237,10 +245,11 @@ namespace BPC2E_C04A {
 		// 
 		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+		this->BackColor = System::Drawing::SystemColors::Control;
 		this->ClientSize = System::Drawing::Size(307, 126);
 		this->Controls->Add(this->Res_im);
 		this->Controls->Add(this->Res_re);
-		this->Controls->Add(this->button1);
+		this->Controls->Add(this->bt_div);
 		this->Controls->Add(this->bt_mult);
 		this->Controls->Add(this->bt_sub);
 		this->Controls->Add(this->text_im_B);
@@ -262,8 +271,47 @@ namespace BPC2E_C04A {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 				 }
-		private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-					 }
+	double get_re_A(void)
+	{
+		return System::Convert::ToDouble(this->text_re_A->Text);
+	}
+	
+	double get_re_B(void)
+	{
+		return System::Convert::ToDouble(this->text_re_B->Text);
+	}
+	double get_im_A(void)
+	{
+		return System::Convert::ToDouble(this->text_im_A->Text);
+	}
+	
+	double get_im_B(void)
+	{
+		return System::Convert::ToDouble(this->text_im_B->Text);
+	}
+private: System::Void bt_add_Click(System::Object^  sender, System::EventArgs^  e) 
+	{
+		this->Res_re->Text = System::Convert::ToString(get_re_A()+get_re_B());
+		this->Res_im->Text = System::Convert::ToString(get_im_A()+get_im_B());
+	}
+
+private: System::Void bt_sub_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		this->Res_re->Text = System::Convert::ToString(get_re_A()-get_re_B());
+		this->Res_im->Text = System::Convert::ToString(get_im_A()-get_im_B());		
+	}
+
+private: System::Void bt_mult_Click(System::Object^  sender, System::EventArgs^  e) 
+	{
+		this->Res_re->Text = System::Convert::ToString((get_re_A()*get_re_B())-(get_im_A()*get_im_B()));
+		this->Res_im->Text = System::Convert::ToString((get_re_A()*get_im_B())+(get_im_A()*get_re_B()));
+	}
+
+private: System::Void bt_div_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		this->Res_re->Text = System::Convert::ToString(((get_re_A()*get_re_B())+(get_im_A()*get_im_B()))/(get_im_A()*get_im_A()+get_im_B()*get_im_B()));
+		this->Res_im->Text = System::Convert::ToString(((get_re_A()*get_im_B())+(get_im_A()*get_re_B()))/(get_im_A()*get_im_A()+get_im_B()*get_im_B()));
+	}
 };
 }
 
