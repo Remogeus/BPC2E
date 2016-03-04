@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1455870101 source:c:\users\ondøej povolný\desktop\vut\bpc2e\cvièení - programy\bpc2e_c1b\main.c
+	<windows.h>
+	<stdio.h>
+	<math.h>
+
