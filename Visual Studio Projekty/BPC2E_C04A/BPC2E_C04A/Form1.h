@@ -1,5 +1,5 @@
 #pragma once
-
+#include "cmplx.h"
 namespace BPC2E_C04A {
 
 	using namespace System;
@@ -269,30 +269,16 @@ namespace BPC2E_C04A {
 
 			}
 #pragma endregion
-	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
-				 }
-	double get_re_A(void)
-	{
-		return System::Convert::ToDouble(this->text_re_A->Text);
-	}
-	
-	double get_re_B(void)
-	{
-		return System::Convert::ToDouble(this->text_re_B->Text);
-	}
-	double get_im_A(void)
-	{
-		return System::Convert::ToDouble(this->text_im_A->Text);
-	}
-	
-	double get_im_B(void)
-	{
-		return System::Convert::ToDouble(this->text_im_B->Text);
-	}
+double re, im;
+
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+				 } 
+
 private: System::Void bt_add_Click(System::Object^  sender, System::EventArgs^  e) 
 	{
-		this->Res_re->Text = System::Convert::ToString(get_re_A()+get_re_B());
-		this->Res_im->Text = System::Convert::ToString(get_im_A()+get_im_B());
+		c_add(re, im, get_re_A(), get_re_B(), get_im_A(), get_im_B());
+		this->Res_re->Text = System::Convert::ToString(re);
+		this->Res_im->Text = System::Convert::ToString(im);
 	}
 
 private: System::Void bt_sub_Click(System::Object^  sender, System::EventArgs^  e)
