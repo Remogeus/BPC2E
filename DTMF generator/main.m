@@ -6,15 +6,14 @@ while(fine == 0)
   % test, zda nezadal uživatel nepovolené znaky (známe BFU a jejich schopnost 
   % rozbít cokoli, i to nerozbitné) 
   num = input(prompt, 's');
-  num = numsep(num);
-  fine = isokay(num); 
+  [fine, num] = isokaysep(num); 
   % isokay? isnotokay? nenapadl mě lepší název na testovací funkci
 end  
 prompt = "Input samplerate (default 8000) : ";
 srate = input(prompt);
 
 if ((max(size(srate))) == 0) 
-% protože Matlab bere odentrování promptu bez inputu jako prázdný vektor
+% protože Matlab/Octave bere odentrování promptu bez inputu jako prázdný vektor
   srate = 8000;
 end
 
@@ -36,7 +35,8 @@ clear prompt
 filename = [filename '.wav']
 v = max(size(num)); 
 % nastavitelná velikost... to až budete vytáčet číslo na britskou zdravotní 
-% službu, však víte - 0118 999 881 999 119 725...3, tak se to bude hodit
+% službu, však víte - 0118 999 881 999 119 725...3 (lehce zapamatovatelné... teď tu melodii budu mít dlouho v 
+% hlavě), tak se to bude hodit
 freq = freqgen(num, v); 
 % freqgen funkce (nastavuje hodnoty dle tabulky DTMF)... kterou jsem našel v
 % jedné z přednášek... myslím z první

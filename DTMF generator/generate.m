@@ -7,6 +7,7 @@
 % na výstupu je vektor složený ze spojených hodnot signálu
 % 
 % poznámka pro mě... otestovat tic-toc
+
 function[sig] = generate(srate, amp, freq,v)
 t = 0:1/srate:0.05;
 sig = amp*sin(2*pi*freq(1,1)*t) + (amp/5)*sin(2*pi*freq(2,1)*t);

@@ -8,6 +8,7 @@
 % 2xN, kde N je velikost vstupního čísla a která je plná frekvencí pro jednotlívá 
 % čísla a řádky separují frekvence pod 1000 Hz a nad 1000 Hz
 %
+
 function[freq] = freqgen(num, v)
 freq = [];
 lookup_table = ['1' '2' '3' 'A'; '4' '5' '6' 'B'; '7' '8' '9' 'C'; '*' '0' '#' 'D'];
